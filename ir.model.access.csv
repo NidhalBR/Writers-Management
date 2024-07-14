@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_institution,access_institution,lmw_writer_management.model_institution_w,base.group_user,1,1,1,1
+access_speciality,access_speciality,lmw_writer_management.model_speciality_w,base.group_user,1,1,1,1
+access_writer,access_writer,model_res_writer,base.group_user,1,1,1,1
+access_writer_specific,access_writer_specific,model_res_writer,lmw_writer_management.group_writer,1,1,1,1
+access_product_template,access_product_template,product.model_product_template,,1,1,1,1

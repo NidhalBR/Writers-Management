@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+
+        <record id="speciality_tree_view" model="ir.ui.view">
+            <field name="name">speciality.w.tree</field>
+            <field name="model">speciality.w</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="ref"/>
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+
+        <record id="speciality_form_view" model="ir.ui.view">
+            <field name="name">speciality.w.form</field>
+            <field name="model">speciality.w</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="ref"/>
+                            <field name="name"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_speciality" model="ir.actions.act_window">
+            <field name="name">Speciality</field>
+            <field name="res_model">speciality.w</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="speciality_tree_view" />
+        </record>
+    </data>
+</odoo>

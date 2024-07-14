@@ -1,0 +1,10 @@
+<odoo>
+    <data>
+        <!-- Group definition -->
+        <record id="group_writer" model="res.groups">
+            <field name="name">Writer Group</field>
+            <field name="category_id" ref="base.module_category_hidden"/>
+            <field name="comment">This group is for writers.</field>
+        </record>
+    </data>
+</odoo>

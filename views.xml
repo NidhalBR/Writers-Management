@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+
+
+        <record id="view_writer_form" model="ir.ui.view">
+            <field name="name">res.partner.form</field>
+            <field name="model">res.writer</field>
+            <field name="priority" eval="1"/>
+            <field name="arch" type="xml">
+                <form string="Partners">
+
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button class="oe_stat_button" name="action_books_written" string="Books Written" type="object"/>
+                    </div>
+                    <div class="oe_button_box" name="button_box"/>
+<!--                    <widget name="web_ribbon" title="Archived" bg_color="text-bg-danger" />-->
+                    <field name="avatar_128" invisible="1"/>
+                    <field name="image_1920" widget='image' class="oe_avatar" options='{"preview_image": "avatar_128"}'/>
+                    <div class="oe_title mb24">
+<!--                        <field name="active" invisible="1"/>-->
+                        <field name="company_id" invisible="1"/>
+                        <field name="country_code" invisible="1"/>
+                        <h1>
+                            <field id="individual" options="{'line_breaks': False}" widget="text" class="text-break" name="name" default_focus="1" placeholder="e.g. Freeman" />
+                            <field id="lastname" options="{'line_breaks': False}" widget="text" class="text-break" name="lastname" default_focus="1" placeholder="e.g. Brandom" />
+                        </h1>
+
+                    </div>
+
+                    <group>
+                        <group>
+                            <span class="o_form_label o_td_label" name="address_name">
+                                <b>Address</b>
+                            </span>
+                            <div class="o_address_format">
+                                <field name="street" placeholder="Street..." class="o_address_street"
+                                    />
+                                <field name="street2" placeholder="Street 2..." class="o_address_street"
+                                    />
+                                <field name="city" placeholder="City" class="o_address_city"
+                                    />
+                                <field name="state_id" class="o_address_state" placeholder="State" options="{'no_open': True, 'no_quick_create': True}"
+                                     context="{'country_id': country_id, 'default_country_id': country_id, 'zip': zip}"/>
+                                <field name="zip" placeholder="ZIP" class="o_address_zip"
+                                    />
+                                <div name="partner_address_country" class="d-flex justify-content-between">
+                                    <field name="country_id" placeholder="Country" class="o_address_country" options='{"no_open": True, "no_create": True}'
+                                        />
+                                </div>
+                            </div>
+                        </group>
+                        <group>>
+                            <field name="phone" widget="phone"/>
+                            <field name="mobile" widget="phone"/>
+                            <field name="email" widget="email" context="{'gravatar_image': True}"/>
+                            <field name="title" options='{"no_open": True}' placeholder="e.g. Mister"
+                                />
+                            <field name="active_lang_count" invisible="1"/>
+                            <field name="lang" invisible="active_lang_count &lt;= 1"/>
+                            <field name="category_id" widget="many2many_tags" options="{'color_field': 'color', 'no_create_edit': True}"
+                                   placeholder='e.g. "B2B", "VIP", "Consulting", ...'/>
+                        </group>
+                    </group>
+
+                    <notebook colspan="4">
+
+                        <page name='writer_books' string="More Information">
+                            <group>
+                                <field name="institution"/>
+                                <field name="speciality"/>
+                                <field name="copyright_"/>
+                                <field name="is_writer"/>
+                                <field name="books" invisible="not is_writer" />
+
+                            </group>
+
+                        </page>
+                    </notebook>
+                    <div class="oe_form_buttons_view">
+                            <button type="action" name="%(writers_report_action)d" string="Print Writer's Report" class="btn-primary"/>
+                    </div>
+
+                </sheet>
+                </form>
+            </field>
+        </record>
+
+
+    <record model="ir.ui.view" id="lmw_writer_management_list2">
+      <field name="name">lmw_writer_management list</field>
+      <field name="model">res.writer</field>
+      <field name="arch" type="xml">
+          <tree>
+              <field name="name"/>
+              <field name="lastname"/>
+              <field name="institution"/>
+              <field name="speciality"/>
+              <field name="copyright_"/>
+              <field name="is_writer"/>
+          </tree>
+      </field>
+    </record>
+
+
+    <record id="action_writer_form" model="ir.actions.act_window">
+        <field name="name">Writer</field>
+        <field name="res_model">res.writer</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('is_writer', '=', True)]</field>
+        <field name="help" type="html">
+          <p class="o_view_nocontent_smiling_face">
+            Create a Contact in your address book
+          </p><p>
+            Odoo helps you track all activities related to your contacts.
+          </p>
+        </field>
+    </record>
+
+
+
+
+    <!-- Top menu item -->
+
+    <menuitem name="Writers Management" id="menu_root">
+    <menuitem name="Writers Management" id="aamenu_root">
+
+      <menuitem id="menu_main" name="Main" action="action_writer_form"/>
+      <menuitem id="menu_institution" name="Institutions" action="lmw_writer_management.action_institution"/>
+      <menuitem id="menu_speciality" name="Specialities" action="lmw_writer_management.action_speciality"/>
+
+    </menuitem>
+    </menuitem>
+<!--
+    <menuitem id="menu_writers_settings" name="Settings">
+      <menuitem id="menu_institution" name="Institutions" action="lmw_writer_management.action_institution"/>
+    </menuitem>
+-->
+    <!-- menu categories -->
+<!--
+    <menuitem name="Menu 1" id="lmw_writer_management.menu_1" parent="lmw_writer_management.menu_root"/>
+    <menuitem name="Menu 2" id="lmw_writer_management.menu_2" parent="lmw_writer_management.menu_root"/>
+-->
+    <!-- actions -->
+<!--
+    <menuitem name="List" id="lmw_writer_management.menu_1_list" parent="lmw_writer_management.menu_1"
+              action="lmw_writer_management.action_window"/>
+    <menuitem name="Server to list" id="lmw_writer_management" parent="lmw_writer_management.menu_2"
+              action="lmw_writer_management.action_server"/>
+-->
+  </data>
+</odoo>

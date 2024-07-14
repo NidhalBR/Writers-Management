@@ -1,0 +1,16 @@
+<odoo>
+    <data>
+        <record id="writers_report_action" model="ir.actions.report">
+            <field name="name">Writers Report Action</field>
+            <field name="model">res.writer</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">lmw_writer_management.writers_report</field>
+            <field name="report_file">lmw_writer_management.writers_report</field>
+            <field name="print_report_name">(object._get_report_base_filename())</field>
+            <field name="attachment">((object.name)+'.pdf')</field>
+            <field name="binding_model_id" ref="model_res_writer"/>
+            <field name="binding_type">report</field>
+            <field name="groups_id" eval="[(4, ref('lmw_writer_management.group_writer'))]"/>
+        </record>
+    </data>
+</odoo>
