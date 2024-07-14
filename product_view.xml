@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+  <data>
+        <record id="product_view_test" model="ir.ui.view">
+            <field name="name">product.view.form</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_only_form_view"/>
+            <field name="arch" type="xml">
+                <field name="name" position="after">
+                    <group>
+                        <field name="is_book"/>
+                    </group>
+                </field>
+                <notebook position="inside" >
+                    <page string="Book Information" name="book_information" invisible="not is_book">
+                        <group>
+                            <field name="writer_name"/>
+                            <field name="writer_lastname"/>
+                            <field name="release_date"/>
+                            <field name="copyright_"/>
+                        </group>
+                    </page>
+                </notebook>
+            </field>
+        </record>
+
+      <record id="product_view_kanban" model="ir.ui.view">
+            <field name="name">product.view.kanban</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_kanban_view"/>
+            <field name="arch" type="xml">
+                 <xpath expr="//div[hasclass('oe_kanban_details')]" >
+                    <kanban default_group_by="writer_name">
+                        <field name="writer_name"/>
+                    </kanban>
+                 </xpath>
+            </field>
+      </record>
+
+      <record id="product_view_search" model="ir.ui.view">
+            <field name="name">product.view.search</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_search_view"/>
+            <field name="arch" type="xml">
+                 <xpath expr="//search" position="inside" >
+                    <field name="writer_name" string="Writer's name"/>
+                 </xpath>
+            </field>
+      </record>
+  </data>
+</odoo>
